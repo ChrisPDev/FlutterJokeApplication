@@ -51,8 +51,12 @@ namespace FlutterJokeApi.Controllers
         [HttpGet("category/{category}")]
         public async Task<ActionResult<IEnumerable<Joke>>> GetJokesByCategory(string category)
         {
+            //var jokes = await _context.Jokes
+            //    .Where(j => j.Category.Equals(category, System.StringComparison.OrdinalIgnoreCase))
+            //    .ToListAsync();
+
             var jokes = await _context.Jokes
-                .Where(j => j.Category.Equals(category, System.StringComparison.OrdinalIgnoreCase))
+                .Where(j => EF.Functions.Like(j.Category, category))
                 .ToListAsync();
 
             if (!jokes.Any())

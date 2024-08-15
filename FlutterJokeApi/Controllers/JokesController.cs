@@ -107,8 +107,8 @@ namespace FlutterJokeApi.Controllers
                 return BadRequest();
             }
 
-            newJoke.CreatedAt = System.DateTime.Now;
-            newJoke.UpdatedAt = System.DateTime.Now;
+            newJoke.CreatedAt = System.DateTime.UtcNow.AddHours(2);
+            newJoke.UpdatedAt = System.DateTime.UtcNow.AddHours(2);
 
             _context.Jokes.Add(newJoke);
             await _context.SaveChangesAsync();
@@ -134,7 +134,7 @@ namespace FlutterJokeApi.Controllers
             joke.Title = updatedJoke.Title;
             joke.Content = updatedJoke.Content;
             joke.Category = updatedJoke.Category;
-            joke.UpdatedAt = System.DateTime.Now;
+            joke.UpdatedAt = System.DateTime.UtcNow.AddHours(2);
 
             _context.Entry(joke).State = EntityState.Modified;
             await _context.SaveChangesAsync();

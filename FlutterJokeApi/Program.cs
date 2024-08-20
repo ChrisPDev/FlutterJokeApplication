@@ -9,6 +9,20 @@ namespace FlutterJokeApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            // Specify when frontend is created
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    name: MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                    }
+                );
+            });
+
             // Add services to the container.
 
             builder.Services.AddControllers();
